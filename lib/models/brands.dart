@@ -11,7 +11,7 @@ class Brand {
     required this.id,
     required this.title,
     required this.slug,
-    this.logo,
+    required this.logo,
     required this.status,
     this.createdAt,
     this.updatedAt,
@@ -20,7 +20,7 @@ class Brand {
   int id;
   String title;
   String slug;
-  String? logo;
+  String logo;
   String status;
   DateTime? createdAt;
   DateTime? updatedAt;

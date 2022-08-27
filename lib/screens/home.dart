@@ -5,12 +5,10 @@ import 'package:mobile/models/api_response.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/services/brand_service.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile/widgets/BrandsWidget.dart';
 import 'package:mobile/widgets/PopularCarsWidget.dart';
-import 'package:unicons/unicons.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
 import '../models/brands.dart';
+import '../widgets/CarWidget.dart';
 import 'login.dart';
 import 'package:mobile/screens/Details.dart';
 
@@ -20,24 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Brand>? brands;
-  var isLoaded = false;
   int currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  getData() async {
-    brands = await BrandService().getBrands();
-    if (brands != null) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +136,7 @@ class _HomeState extends State<Home> {
                   children: [
                     BrandsWidget(),
                     PopularCarsWidget(),
+                    CarsWidget(),
                   ],
                 ),
               ),
@@ -162,7 +144,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
+      /*bottomNavigationBar: BottomAppBar(
         notchMargin: 5,
         elevation: 10,
         clipBehavior: Clip.antiAlias,
@@ -179,7 +161,7 @@ class _HomeState extends State<Home> {
             });
           },
         ),
-      ),
+      ),*/
     );
   }
 }

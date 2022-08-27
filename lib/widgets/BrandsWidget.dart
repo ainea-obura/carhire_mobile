@@ -13,7 +13,6 @@ class BrandsWidget extends StatefulWidget {
 class _BrandsWidgetState extends State<BrandsWidget> {
   List<Brand>? brands;
   var isLoaded = false;
-  int currentIndex = 0;
 
   @override
   void initState() {
@@ -63,11 +62,12 @@ class _BrandsWidgetState extends State<BrandsWidget> {
             height: 50,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: brands?.length,
-                itemBuilder: (context, index) {
-                  return Container(
+              child: Visibility(
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: brands?.length,
+                  itemBuilder: (context, index) {
+                    return Container(
                       margin: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
@@ -80,8 +80,34 @@ class _BrandsWidgetState extends State<BrandsWidget> {
                               blurRadius: 6),
                         ],
                       ),
-                      child: Text(brands![index].title));
-                },
+                      child: Image(
+                        image: NetworkImage(
+                          'http://192.168.8.160:8000${brands![index].logo}',
+                        ),
+                        //NetworkImage(items[index].imageURL.toString()),
+                        fit: BoxFit.fill,
+                      ),
+                    );
+                    /*return Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 6),
+                          ],
+                        ),
+                        child: Text(brands![index].logo),
+                    );*/
+                  },
+                ),
+                replacement: const Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
             ),
           ),
