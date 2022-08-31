@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 
 import '../models/cars.dart';
 import '../services/car_service.dart';
@@ -110,7 +110,7 @@ class _PopularCarsWidgetState extends State<PopularCarsWidget> {
                                     height: 50,
                                     child: Image(
                                       image: NetworkImage(
-                                        'http://192.168.8.160:8000${items[index].image}',
+                                        'http://192.168.8.160:8000${items[index].thumbnail}',
                                       ),
                                       //NetworkImage(items[index].logo.toString()),
                                       fit: BoxFit.fill,
@@ -191,3 +191,4 @@ class _PopularCarsWidgetState extends State<PopularCarsWidget> {
     );
   }
 }
+*/

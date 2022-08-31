@@ -12,13 +12,13 @@ class Car {
   List<CarElement> cars;
 
   factory Car.fromJson(Map<String, dynamic> json) => Car(
-        cars: List<CarElement>.from(
-            json["cars"].map((x) => CarElement.fromJson(x))),
-      );
+    cars: List<CarElement>.from(
+        json["cars"].map((x) => CarElement.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "cars": List<dynamic>.from(cars.map((x) => x.toJson())),
-      };
+    "cars": List<dynamic>.from(cars.map((x) => x.toJson())),
+  };
 }
 
 class CarElement {
@@ -32,6 +32,7 @@ class CarElement {
     this.summary,
     this.description,
     this.status,
+    this.thumbnail,
     this.createdAt,
     this.updatedAt,
     required this.images,
@@ -46,43 +47,47 @@ class CarElement {
   String? summary;
   String? description;
   String? status;
+  String? thumbnail;
   DateTime? createdAt;
   DateTime? updatedAt;
-  List<Image> images;
+  List<Images> images;
 
   factory CarElement.fromJson(Map<String, dynamic> json) => CarElement(
-        id: json["id"],
-        title: json["title"],
-        slug: json["slug"],
-        catId: json["cat_id"],
-        brandId: json["brand_id"],
-        price: json["price"],
-        summary: json["summary"],
-        description: json["description"],
-        status: json["status"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-      );
+    id: json["id"],
+    title: json["title"],
+    slug: json["slug"],
+    catId: json["cat_id"],
+    brandId: json["brand_id"],
+    price: json["price"],
+    summary: json["summary"],
+    description: json["description"],
+    status: json["status"],
+    thumbnail: json["thumbnail"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+    images:
+    List<Images>.from(json["images"].map((x) => Images.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "slug": slug,
-        "cat_id": catId,
-        "brand_id": brandId,
-        "price": price,
-        "summary": summary,
-        "description": description,
-        "status": status,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
-      };
+    "id": id,
+    "title": title,
+    "slug": slug,
+    "cat_id": catId,
+    "brand_id": brandId,
+    "price": price,
+    "summary": summary,
+    "description": description,
+    "status": status,
+    "thumbnail": thumbnail,
+    "created_at": createdAt?.toIso8601String(),
+    "updated_at": updatedAt?.toIso8601String(),
+    "images": List<dynamic>.from(images.map((x) => x.toJson())),
+  };
 }
 
-class Image {
-  Image({
+class Images {
+  Images({
     this.id,
     this.carId,
     this.image,
@@ -96,19 +101,19 @@ class Image {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-        id: json["id"],
-        carId: json["car_id"],
-        image: json["image"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-      );
+  factory Images.fromJson(Map<String, dynamic> json) => Images(
+    id: json["id"],
+    carId: json["car_id"],
+    image: json["image"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "car_id": carId,
-        "image": image,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-      };
+    "id": id,
+    "car_id": carId,
+    "image": image,
+    "created_at": createdAt?.toIso8601String(),
+    "updated_at": updatedAt?.toIso8601String(),
+  };
 }

@@ -68,7 +68,7 @@ class _CarsWidgetState extends State<CarsWidget> {
                     onTap: () {},
                     child: Container(
                       margin: EdgeInsets.all(10),
-                      /*child: FutureBuilder<Car>(
+                      child: FutureBuilder<Car>(
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
@@ -76,30 +76,63 @@ class _CarsWidgetState extends State<CarsWidget> {
                                 child: CircularProgressIndicator());
                           } else {
                             return ListView.builder(
-                              scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               itemCount: snapshot.data!.cars.length,
                               itemBuilder: (context, index) {
-                                return ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount:
-                                      snapshot.data!.cars[index].images.length,
-                                  itemBuilder: (context, index1) {
-                                    return Container(
-                                      height: 50,
-                                      child: Text(snapshot
-                                          .data!.cars[index].title
-                                          .toString()),
-                                    );
-                                  },
+                                return Column(
+                                  children: [
+                                    Container(
+                                      height: 100,
+                                      width: 110,
+                                      margin: EdgeInsets.all(10),
+                                      child: Image(
+                                        image: NetworkImage(
+                                          'http://192.168.8.160:8000${snapshot.data!.cars[index].thumbnail.toString()}',
+                                        ),
+                                        //NetworkImage(items[index].logo.toString()),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(bottom: 8),
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        //height: 10,
+                                        child: Text(
+                                          snapshot.data!.cars[index].title
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF555555)),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 5),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            snapshot.data!.cars[index].price
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xFF00A368)),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 );
                               },
                             );
                           }
                         },
                         future: fetchData(),
-                      ),*/
+                      ),
                     ),
                   )
                 ],
