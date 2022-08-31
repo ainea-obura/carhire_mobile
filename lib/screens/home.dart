@@ -135,7 +135,7 @@ class _HomeState extends State<Home> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BrandsWidget(),
-                    PopularCarsWidget(),
+                    //PopularCarsWidget(),
                     CarsWidget(),
                   ],
                 ),
