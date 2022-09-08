@@ -75,10 +75,10 @@ class _HomeState extends State<Home> {
               //Welcome Text
               Container(
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text(
                       "Welcome",
                       style: TextStyle(
@@ -97,8 +97,8 @@ class _HomeState extends State<Home> {
 
               //search widget
               Container(
-                margin: EdgeInsets.all(15),
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                margin: const EdgeInsets.all(15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 height: 50,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -108,14 +108,14 @@ class _HomeState extends State<Home> {
                   children: [
                     const Icon(Icons.search),
                     Container(
-                      margin: EdgeInsets.only(left: 10),
+                      margin: const EdgeInsets.only(left: 10),
                       width: 250,
                       child: TextFormField(
                         decoration: const InputDecoration(
                             hintText: "search car ", border: InputBorder.none),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     //Icon(Icons.filter_list),
                   ],
                 ),
@@ -123,8 +123,8 @@ class _HomeState extends State<Home> {
 
               //cars widgets
               Container(
-                padding: EdgeInsets.only(top: 20),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.only(top: 20),
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
@@ -133,7 +133,7 @@ class _HomeState extends State<Home> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     BrandsWidget(),
                     //PopularCarsWidget(),
                     CarsWidget(),
