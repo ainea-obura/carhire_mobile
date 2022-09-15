@@ -23,31 +23,31 @@ class Car {
 
 class CarElement {
   CarElement({
-    this.id,
-    this.title,
-    this.slug,
-    this.catId,
-    this.brandId,
-    this.price,
-    this.summary,
-    this.description,
-    this.status,
-    this.thumbnail,
+    required this.id,
+    required this.title,
+    required this.slug,
+    required this.catId,
+    required this.brandId,
+    required this.price,
+    required this.year,
+    required this.seats,
+    required this.status,
+    required this.thumbnail,
     this.createdAt,
     this.updatedAt,
     required this.images,
   });
 
-  int? id;
-  String? title;
-  String? slug;
-  int? catId;
-  int? brandId;
-  String? price;
-  String? summary;
-  String? description;
-  String? status;
-  String? thumbnail;
+  int id;
+  String title;
+  String slug;
+  int catId;
+  int brandId;
+  String price;
+  String year;
+  String seats;
+  String status;
+  String thumbnail;
   DateTime? createdAt;
   DateTime? updatedAt;
   List<Images> images;
@@ -59,8 +59,8 @@ class CarElement {
         catId: json["cat_id"],
         brandId: json["brand_id"],
         price: json["price"],
-        summary: json["summary"],
-        description: json["description"],
+        year: json["year"],
+        seats: json["seats"],
         status: json["status"],
         thumbnail: json["thumbnail"],
         createdAt: DateTime.parse(json["created_at"]),
@@ -76,8 +76,8 @@ class CarElement {
         "cat_id": catId,
         "brand_id": brandId,
         "price": price,
-        "summary": summary,
-        "description": description,
+        "year": year,
+        "seats": seats,
         "status": status,
         "thumbnail": thumbnail,
         "created_at": createdAt?.toIso8601String(),

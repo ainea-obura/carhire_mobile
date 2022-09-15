@@ -1,68 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'button_widget.dart';
-
 class DateRangePickerWidget extends StatefulWidget {
   @override
   _DateRangePickerWidgetState createState() => _DateRangePickerWidgetState();
 }
 
 class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
-  DateTimeRange? dateRange;
-
-  String getFrom() {
-    if (dateRange == null) {
-      return 'From';
-    } else {
-      return DateFormat('MM/dd/yyyy').format(dateRange!.start);
-    }
-  }
-
-  String getUntil() {
-    if (dateRange == null) {
-      return 'Until';
-    } else {
-      return DateFormat('MM/dd/yyyy').format(dateRange!.end);
-    }
-  }
-
+  DateTimeRange dateRange = DateTimeRange(
+    start: DateTime.now(),
+    end: DateTime.now().add(Duration(hours: 24 * 3)),
+  );
   @override
-  Widget build(BuildContext context) => HeaderWidget(
-        title: 'Date Range',
-        child: Row(
-          children: [
-            Expanded(
-              child: ButtonWidget(
-                text: getFrom(),
-                onClicked: () => pickDateRange(context),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Icon(Icons.arrow_forward, color: Color(0xFF00A368)),
-            const SizedBox(width: 8),
-            Expanded(
-              child: ButtonWidget(
-                text: getUntil(),
-                onClicked: () => pickDateRange(context),
-              ),
-            ),
-          ],
-        ),
-      );
+  Widget build(BuildContext context) {
+    final start = dateRange.start;
+    final end = dateRange.end;
+    final days = dateRange.duration;
 
-  Future pickDateRange(BuildContext context) async {
-    final initialDateRange = DateTimeRange(
-      start: DateTime.now(),
-      end: DateTime.now().add(Duration(hours: 24 * 3)),
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        //mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const Text("Date Range"),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  child: Text(DateFormat('yyyy/MM/dd').format(start)),
+                  onPressed: pickDateRange,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Icon(Icons.arrow_forward, color: Color(0xFF00A368)),
+              const SizedBox(width: 8),
+              Expanded(
+                child: ElevatedButton(
+                  child: Text(DateFormat('yyyy/MM/dd').format(end)),
+                  onPressed: pickDateRange,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Days: ${days.inDays}',
+            style: TextStyle(fontSize: 32),
+          )
+        ],
+      ),
     );
-    final newDateRange = await showDateRangePicker(
+  }
+
+  Future pickDateRange() async {
+    DateTimeRange? newDateRange = await showDateRangePicker(
       context: context,
+      initialDateRange: dateRange,
       firstDate: DateTime(DateTime.now().year - 5),
       lastDate: DateTime(DateTime.now().year + 5),
-      initialDateRange: dateRange ?? initialDateRange,
     );
-
     if (newDateRange == null) return;
 
     setState(() => dateRange = newDateRange);
