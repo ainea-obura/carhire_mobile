@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/BottomCheckoutSheet.dart';
 import '../widgets/date_range_picker_widget.dart';
+
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class Checkout extends StatefulWidget {
   const Checkout({Key? key}) : super(key: key);
@@ -36,6 +39,31 @@ class _CheckoutState extends State<Checkout> {
               ),
               const SizedBox(height: 24),
               DateRangePickerWidget(),
+              const SizedBox(height: 15),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(onSurface: Colors.yellow),
+                onPressed: () {
+                  showSlidingBottomSheet(
+                    context,
+                    builder: (context) {
+                      return SlidingSheetDialog(
+                          elevation: 8,
+                          cornerRadius: 16,
+                          builder: (context, state) {
+                            return BottomCheckoutSheet();
+                          });
+                    },
+                  );
+                },
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              )
             ],
           ),
         ),
