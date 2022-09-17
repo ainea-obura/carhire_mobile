@@ -49,8 +49,8 @@ class _CarsWidgetState extends State<CarsWidget> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    childAspectRatio: 1,
+                    maxCrossAxisExtent: 250,
+                    childAspectRatio: 1 / 1.1,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10),
                 scrollDirection: Axis.vertical,
@@ -86,19 +86,19 @@ class _CarsWidgetState extends State<CarsWidget> {
                             child: Column(
                               children: [
                                 Container(
-                                  height: 110,
-                                  width: 200,
+                                  height: 100,
+                                  width: 250,
                                   margin: const EdgeInsets.all(3),
                                   child: Image(
                                     image: NetworkImage(
-                                      'http://192.168.8.116:8000${snapshot.data!.cars[index].thumbnail.toString()}',
+                                      'http://192.168.8.122:8000${snapshot.data!.cars[index].thumbnail.toString()}',
                                     ),
                                     //NetworkImage(items[index].logo.toString()),
                                     fit: BoxFit.fitHeight,
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 3),
+                                  padding: const EdgeInsets.all(3),
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     //height: 10,
@@ -138,115 +138,6 @@ class _CarsWidgetState extends State<CarsWidget> {
           },
           future: fetchData(),
         ),
-
-        /*GridView.count(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          childAspectRatio: 0.8,
-          shrinkWrap: true,
-          children: [
-            //for (int i = 1; i < 8; i++)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 4,
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CarDetails()),
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        child: FutureBuilder<Car>(
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            } else {
-                              return ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.cars.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Container(
-                                        height: 110,
-                                        width: 200,
-                                        margin: const EdgeInsets.all(3),
-                                        child: Image(
-                                          image: NetworkImage(
-                                            'http://192.168.8.197:8000${snapshot.data!.cars[index].thumbnail.toString()}',
-                                          ),
-                                          //NetworkImage(items[index].logo.toString()),
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 5),
-                                        child: Container(
-                                          alignment: Alignment.centerLeft,
-                                          //height: 10,
-                                          child: Text(
-                                            snapshot.data!.cars[index].title
-                                                .toString(),
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color(0xFF555555)),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              snapshot.data!.cars[index].price
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xFF00A368)),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-                          },
-                          future: fetchData(),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-          ],
-        ),*/
       ],
     );
   }

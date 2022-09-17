@@ -1,13 +1,23 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-//import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../models/cars.dart';
 import 'checkout.dart';
 
-class CarDetails extends StatelessWidget {
+class CarDetails extends StatefulWidget {
   const CarDetails({Key? key, required this.cars}) : super(key: key);
   final CarElement cars;
+
+  @override
+  State<CarDetails> createState() => _CarDetailsState(cars);
+}
+
+class _CarDetailsState extends State<CarDetails> {
+  CarElement cars;
+  _CarDetailsState(this.cars); //constructor
+
+  int activeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +48,11 @@ class CarDetails extends StatelessWidget {
                   options: CarouselOptions(
                     height: 230,
                     //autoPlay: true,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        activeIndex = index;
+                      });
+                    },
                     enableInfiniteScroll: false,
                     enlargeCenterPage: true,
                     autoPlayAnimationDuration: const Duration(seconds: 2),
@@ -46,13 +61,22 @@ class CarDetails extends StatelessWidget {
                   itemBuilder: (context, index1, realIndex) {
                     return Image(
                       image: NetworkImage(
-                        'http://192.168.8.116:8000/product_images/${cars.images[index1].image.toString()}',
+                        'http://192.168.8.122:8000/product_images/${cars.images[index1].image.toString()}',
                       ),
                       //NetworkImage(items[index].logo.toString()),
                       fit: BoxFit.contain,
                     );
                   },
                 ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: AnimatedSmoothIndicator(
+                    activeIndex: activeIndex,
+                    count: cars.images.length,
+                    effect: const SlideEffect(
+                      activeDotColor: Color(0xFF00A368),
+                    )),
               ),
               Container(
                   height: MediaQuery.of(context).size.height,
@@ -65,6 +89,13 @@ class CarDetails extends StatelessWidget {
                           topRight: Radius.circular(30))),
                   child: Column(
                     children: [
+                      Text(
+                        "Car Info",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Row(
@@ -78,48 +109,6 @@ class CarDetails extends StatelessWidget {
                             ),
                             Text(
                               cars.title.toString(),
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Price per day: ",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            Text(
-                              cars.price.toString(),
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Status: ",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            Text(
-                              cars.status.toString(),
                               style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -173,59 +162,99 @@ class CarDetails extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            //const Text("KES "),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    "KES ",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  Text(
-                                    cars.price.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  onSurface: Colors.yellow),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Checkout()),
-                                );
-                              },
-                              child: const Text(
-                                'book now',
-                                style: TextStyle(
-                                  fontSize: 25,
+                            const Text(
+                              "Price per day: ",
+                              style: TextStyle(
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            )
+                                  color: Colors.white),
+                            ),
+                            Text(
+                              cars.price.toString(),
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
                           ],
                         ),
-                      )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Row(
+                          children: [
+                            const Text(
+                              "Status: ",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                            Text(
+                              cars.status.toString(),
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   )),
             ],
           ),
         ),
       ),
-      //bottomNavigationBar: BottomBar(),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 50,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: const BoxDecoration(color: Colors.white),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Text(
+                    "KES ",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  Text(
+                    cars.price.toString(),
+                    style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                ],
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    onSurface: const Color(0xFF00A368)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Checkout()),
+                  );
+                },
+                child: const Text(
+                  'book now',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
