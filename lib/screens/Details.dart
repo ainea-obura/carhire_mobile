@@ -61,7 +61,7 @@ class _CarDetailsState extends State<CarDetails> {
                   itemBuilder: (context, index1, realIndex) {
                     return Image(
                       image: NetworkImage(
-                        'http://192.168.8.122:8000/product_images/${cars.images[index1].image.toString()}',
+                        'http://192.168.8.131:8000/product_images/${cars.images[index1].image.toString()}',
                       ),
                       //NetworkImage(items[index].logo.toString()),
                       fit: BoxFit.contain,
@@ -239,7 +239,8 @@ class _CarDetailsState extends State<CarDetails> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Checkout()),
+                    MaterialPageRoute(
+                        builder: (context) => Checkout(cars: cars)),
                   );
                 },
                 child: const Text(

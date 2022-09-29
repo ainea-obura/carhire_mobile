@@ -82,7 +82,7 @@ class _BrandsWidgetState extends State<BrandsWidget> {
                       ),
                       child: Image(
                         image: NetworkImage(
-                          'http://192.168.8.122:8000${brands![index].logo}',
+                          'http://192.168.8.131:8000${brands![index].logo}',
                         ),
                         //NetworkImage(items[index].imageURL.toString()),
                         fit: BoxFit.contain,
