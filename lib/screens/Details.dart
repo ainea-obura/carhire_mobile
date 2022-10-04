@@ -225,7 +225,7 @@ class _CarDetailsState extends State<CarDetails> {
                         color: Colors.black),
                   ),
                   Text(
-                    cars.price.toString(),
+                    "${cars.price.toString()} /day",
                     style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
