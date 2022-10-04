@@ -24,18 +24,30 @@ class _CheckoutState extends State<Checkout> {
   TextEditingController startController = TextEditingController();
   TextEditingController endController = TextEditingController();
   //text editing controller for text field
+ // late String days = endController.text.difference(startController.text).inDays;
 
   @override
   void initState() {
-    startController.text = ""; //set the initial value of text field
-    endController.text = "";
+    startController.text = DateTime.now().toString(); //set the initial value of text field
+    endController.text = DateTime.now().add(const Duration(days: 3)).toString();
     super.initState();
   }
+
+  //DateTime dt1 = DateTime.parse("2022-10-05");
+  //DateTime dt2 = DateTime.parse("2022-10-13");
 
   Future<Hire>? _hire;
 
   @override
   Widget build(BuildContext context) {
+
+    DateTime dt1 = DateTime.parse(startController.text);
+    DateTime dt2 = DateTime.parse(endController.text);
+    final diff = dt1.difference(dt2);
+
+    //final amnt = double.parse(cars.price.toString());
+    final amnt = int.parse(diff.inDays.toString()) * double.parse(cars.price.toString());
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -60,7 +72,7 @@ class _CheckoutState extends State<Checkout> {
               ),
               const SizedBox(height: 24),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   //mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -72,10 +84,10 @@ class _CheckoutState extends State<Checkout> {
                             child: TextField(
                           controller:
                               startController, //editing controller of this TextField
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               icon: Icon(
                                   Icons.calendar_today), //icon of text field
-                              labelText: "Enter Date" //label text of field
+                              labelText: "Enter hire Date" //label text of field
                               ),
                           readOnly:
                               true, //set it true, so that user will not able to edit text
@@ -107,16 +119,16 @@ class _CheckoutState extends State<Checkout> {
                           },
                         )),
                         const SizedBox(width: 8),
-                        Icon(Icons.arrow_forward, color: Color(0xFF00A368)),
+                        const Icon(Icons.arrow_forward, color: Color(0xFF00A368)),
                         const SizedBox(width: 8),
                         Expanded(
                             child: TextField(
                           controller:
                               endController, //editing controller of this TextField
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               icon: Icon(
                                   Icons.calendar_today), //icon of text field
-                              labelText: "Enter Date" //label text of field
+                              labelText: "Enter Return Date" //label text of field
                               ),
                           readOnly:
                               true, //set it true, so that user will not able to edit text
@@ -154,7 +166,11 @@ class _CheckoutState extends State<Checkout> {
               ),
               //DateRangePickerWidget(),
               const SizedBox(height: 15),
-              Text(cars.price),
+              Text("Days: ${diff.inDays}"),
+              const SizedBox(height: 15),
+              Text("${cars.price} /day"),
+              const SizedBox(height: 15),
+              Text("Total amount: ${amnt}"),
               const SizedBox(
                 height: 15,
               ),
@@ -165,7 +181,7 @@ class _CheckoutState extends State<Checkout> {
                         createHire(startController.text, endController.text);
                   });
                 },
-                child: const Text('Create Data'),
+                child: const Text('Create Hire'),
               ),
               /*ElevatedButton(
                 style: ElevatedButton.styleFrom(onSurface: Colors.yellow),
