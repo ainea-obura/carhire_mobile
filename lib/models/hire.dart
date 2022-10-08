@@ -4,14 +4,16 @@ class Hire {
   final int id;
   final String start;
   final String end;
+  final String amount;
 
-  const Hire({required this.id, required this.start, required this.end});
+  const Hire({required this.id, required this.start, required this.end, required this.amount});
 
   factory Hire.fromJson(Map<String, dynamic> json) {
     return Hire(
       id: json['id'],
       start: json['start'],
       end: json['end'],
+      amount: json['amount']
     );
   }
 }

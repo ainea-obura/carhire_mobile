@@ -48,7 +48,7 @@ class _CarsWidgetState extends State<CarsWidget> {
               return GridView.builder(
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 250,
                     childAspectRatio: 1 / 1.1,
                     crossAxisSpacing: 10,
@@ -91,7 +91,7 @@ class _CarsWidgetState extends State<CarsWidget> {
                                   margin: const EdgeInsets.all(3),
                                   child: Image(
                                     image: NetworkImage(
-                                      'http://192.168.8.131:8000${snapshot.data!.cars[index].thumbnail.toString()}',
+                                      'http://192.168.8.138:8000${snapshot.data!.cars[index].thumbnail.toString()}',
                                     ),
                                     //NetworkImage(items[index].logo.toString()),
                                     fit: BoxFit.fitHeight,
