@@ -23,8 +23,6 @@ class _CheckoutState extends State<Checkout> {
 
   TextEditingController startController = TextEditingController();
   TextEditingController endController = TextEditingController();
-  //text editing controller for text field
- // late String days = endController.text.difference(startController.text).inDays;
 
   @override
   void initState() {
@@ -33,11 +31,8 @@ class _CheckoutState extends State<Checkout> {
     super.initState();
   }
 
-  //late double total_amount;
   var totalAmount;
-
-  //DateTime dt1 = DateTime.parse("2022-10-05");
-  //DateTime dt2 = DateTime.parse("2022-10-13");
+  //var car_id = cars.id;
 
   Future<Hire>? _hire;
 
@@ -141,9 +136,10 @@ class _CheckoutState extends State<Checkout> {
                           onTap: () async {
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime
-                                  .now(), //DateTime.now() - not to allow to choose before today.
+                              //initialDate: DateTime.now(),
+                              initialDate: DateTime.parse(startController.text),
+                              firstDate:DateTime.parse(startController.text),
+                              //firstDate: DateTime.now(), //DateTime.now() - not to allow to choose before today.
                               lastDate: DateTime(DateTime.now().year + 5),
                             );
 
@@ -186,35 +182,12 @@ class _CheckoutState extends State<Checkout> {
                 onPressed: () {
                   setState(() {
                     _hire =
-                        createHire(startController.text, endController.text, totalAmount);
+                        createHire(cars.id ,startController.text, endController.text, totalAmount);
                   });
                 },
                 child: const Text('Create Hire'),
               ),
-              /*ElevatedButton(
-                style: ElevatedButton.styleFrom(onSurface: Colors.yellow),
-                onPressed: () {
-                  showSlidingBottomSheet(
-                    context,
-                    builder: (context) {
-                      return SlidingSheetDialog(
-                          elevation: 8,
-                          cornerRadius: 16,
-                          builder: (context, state) {
-                            return BottomCheckoutSheet();
-                          });
-                    },
-                  );
-                },
-                child: const Text(
-                  'Submit',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              )*/
+
             ],
           ),
         ),

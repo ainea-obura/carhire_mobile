@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant.dart';
 
-Future<Hire> createHire(String start, String end, double totalAmount) async {
+Future<Hire> createHire(int carId, String start, String end, double totalAmount) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("token");
   final response = await http.post(
@@ -18,6 +18,7 @@ Future<Hire> createHire(String start, String end, double totalAmount) async {
       'Authorization': 'Bearer $token'
     },
     body: jsonEncode(<String, String>{
+      'car_id': carId.toString(),
       'start': start,
       'end': end,
       'amount': totalAmount.toString(),
