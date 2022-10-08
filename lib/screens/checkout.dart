@@ -19,7 +19,7 @@ class Checkout extends StatefulWidget {
 
 class _CheckoutState extends State<Checkout> {
   CarElement cars;
-  _CheckoutState(this.cars); //constructor
+  _CheckoutState(this.cars,); //constructor
 
   TextEditingController startController = TextEditingController();
   TextEditingController endController = TextEditingController();
@@ -33,6 +33,9 @@ class _CheckoutState extends State<Checkout> {
     super.initState();
   }
 
+  //late double total_amount;
+  var totalAmount;
+
   //DateTime dt1 = DateTime.parse("2022-10-05");
   //DateTime dt2 = DateTime.parse("2022-10-13");
 
@@ -43,10 +46,13 @@ class _CheckoutState extends State<Checkout> {
 
     DateTime dt1 = DateTime.parse(startController.text);
     DateTime dt2 = DateTime.parse(endController.text);
-    final diff = dt1.difference(dt2);
+    final diff = dt2.difference(dt1);
 
     //final amnt = double.parse(cars.price.toString());
-    final amnt = int.parse(diff.inDays.toString()) * double.parse(cars.price.toString());
+    final amount = int.parse(diff.inDays.toString()) * double.parse(cars.price.toString());
+    setState(() {
+      totalAmount = amount; //set output date to TextField value.
+    });
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -170,15 +176,17 @@ class _CheckoutState extends State<Checkout> {
               const SizedBox(height: 15),
               Text("${cars.price} /day"),
               const SizedBox(height: 15),
-              Text("Total amount: ${amnt}"),
+              Text("Total amount: ${amount}"),
               const SizedBox(
                 height: 15,
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF00A368)),
                 onPressed: () {
                   setState(() {
                     _hire =
-                        createHire(startController.text, endController.text);
+                        createHire(startController.text, endController.text, totalAmount);
                   });
                 },
                 child: const Text('Create Hire'),

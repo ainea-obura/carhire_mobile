@@ -4,13 +4,9 @@ import 'dart:convert';
 import 'package:mobile/models/api_response.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/services/brand_service.dart';
 import 'package:mobile/widgets/BrandsWidget.dart';
-import 'package:mobile/widgets/PopularCarsWidget.dart';
-import '../models/brands.dart';
 import '../widgets/CarWidget.dart';
 import 'login.dart';
-import 'package:mobile/screens/Details.dart';
 
 class Home extends StatefulWidget {
   @override
