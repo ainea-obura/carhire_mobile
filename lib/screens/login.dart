@@ -36,6 +36,10 @@ class _LoginState extends State<Login> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setString('token', user.token ?? '');
     await pref.setInt('userId', user.id ?? 0);
+    await pref.setString('fname', user.fname ?? '');
+    await pref.setString('lname', user.lname ?? '');
+    await pref.setString('email', user.email ?? '');
+    //await pref.setString('user', json.encode(body['user']));
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => Home()), (route) => false);
   }
