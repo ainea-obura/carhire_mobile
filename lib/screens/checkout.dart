@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile/models/cars.dart';
+import 'package:mobile/screens/home.dart';
 import 'package:mobile/services/hire_service.dart';
 
 import '../models/hire.dart';
@@ -183,6 +184,11 @@ class _CheckoutState extends State<Checkout> {
                   setState(() {
                     _hire =
                         createHire(cars.id ,startController.text, endController.text, totalAmount);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Home()),
+                    );
                   });
                 },
                 child: const Text('Create Hire'),

@@ -1,12 +1,14 @@
 //import 'package:mobile/screens/profile.dart';
 import 'dart:convert';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mobile/models/api_response.dart';
 import 'package:mobile/services/user_service.dart';
+import 'package:mobile/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/widgets/BrandsWidget.dart';
 import '../widgets/CarWidget.dart';
 import 'login.dart';
+import '../widgets/MyHeaderDrawer.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,6 +18,22 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentIndex = 0;
 
+  String? fName;
+
+  @override
+  void initState(){
+    _loadUserData();
+    super.initState();
+  }
+  _loadUserData() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var firstName = pref.getString('fname');
+    setState(() {
+      fName = firstName;
+    });
+    //print(lname);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size; //check the size of the device
@@ -23,21 +41,82 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       backgroundColor: Color(0xFF00A368),
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                MyHeaderDrawer(),
+                //drawerList();
+                ListTile(
+                  leading: Icon(
+                    Icons.car_rental,
+                  ),
+                  title: const Text('My Hires'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.train,
+                  ),
+                  title: const Text('Contact us'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const AboutListTile( // <-- SEE HERE
+                  icon: Icon(
+                    Icons.info,
+                  ),
+                  child: Text('About us'),
+                  applicationIcon: Icon(
+                    Icons.local_play,
+                  ),
+                  applicationName: 'Car Hire',
+                  applicationVersion: '1.0',
+                  applicationLegalese: '© 2022 Car Hire',
+                  aboutBoxChildren: [
+                    ///Content goes here...
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF00A368),
+        //title: Text('Carhire'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.exit_to_app,
+              size: 30,
+              color: Colors.white,
+            ),
+            onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.remove('email');
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (BuildContext ctx) => Login()));
+            },
+          ),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               //custom appbar
-              Container(
+              /*Container(
                 padding: EdgeInsets.only(right: 20, left: 15, top: 10),
+
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                      size: 30,
-                    ),
+
                     Container(
                       decoration: BoxDecoration(
                           color: const Color(0xFF00A368),
@@ -66,7 +145,7 @@ class _HomeState extends State<Home> {
                     )
                   ],
                 ),
-              ),
+              ),*/
 
               //Welcome Text
               Container(
@@ -74,9 +153,9 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children:  [
                     Text(
-                      "Welcome",
+                      "Welcome $fName,",
                       style: TextStyle(
                         fontSize: 35,
                         color: Colors.white,

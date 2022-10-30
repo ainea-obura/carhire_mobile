@@ -35,3 +35,13 @@ Future<Hire> createHire(int carId, String start, String end, double totalAmount)
     throw Exception('Failed to create hire.');
   }
 }
+
+Future<Hire> fetchData() async {
+  var response = await http.get(Uri.parse(viewHireURL));
+  var data = jsonDecode(response.body.toString());
+  if (response.statusCode == 200) {
+    return Hire.fromJson(data);
+  } else {
+    return Hire.fromJson(data);
+  }
+}

@@ -91,7 +91,7 @@ class _CarsWidgetState extends State<CarsWidget> {
                                   margin: const EdgeInsets.all(3),
                                   child: Image(
                                     image: NetworkImage(
-                                      'http://192.168.8.138:8000${snapshot.data!.cars[index].thumbnail.toString()}',
+                                      'http://192.168.8.152:8000${snapshot.data!.cars[index].thumbnail.toString()}',
                                     ),
                                     //NetworkImage(items[index].logo.toString()),
                                     fit: BoxFit.fitHeight,
