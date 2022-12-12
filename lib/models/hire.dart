@@ -71,23 +71,3 @@ class HireElement {
 }
 
 
-/*class Hire {
-  final int id;
-  final int carId;
-  final String start;
-  final String end;
-  final String amount;
-
-  const Hire({required this.id, required this.carId, required this.start, required this.end, required this.amount});
-
-  factory Hire.fromJson(Map<String, dynamic> json) {
-    return Hire(
-      id: json['id'],
-      carId: json['car_id'],
-      start: json['start'],
-      end: json['end'],
-      amount: json['amount']
-    );
-  }
-}*/
-

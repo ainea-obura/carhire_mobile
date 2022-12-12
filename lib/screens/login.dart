@@ -39,7 +39,6 @@ class _LoginState extends State<Login> {
     await pref.setString('fname', user.fname ?? '');
     await pref.setString('lname', user.lname ?? '');
     await pref.setString('email', user.email ?? '');
-    //await pref.setString('user', json.encode(body['user']));
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => Home()), (route) => false);
   }
@@ -47,11 +46,11 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text('Login'),
         centerTitle: true,
         backgroundColor: Colors.teal,
-      ),
+      ),*/
       body: Container(
           color: Colors.teal,
           child: Stack(
