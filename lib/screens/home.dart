@@ -1,14 +1,14 @@
 //import 'package:mobile/screens/profile.dart';
 import 'dart:convert';
+import 'package:mobile/screens/contact.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mobile/models/api_response.dart';
-import 'package:mobile/services/user_service.dart';
-import 'package:mobile/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/widgets/BrandsWidget.dart';
 import '../widgets/CarWidget.dart';
 import 'login.dart';
 import '../widgets/MyHeaderDrawer.dart';
+import '../screens/my_hires.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -54,7 +54,10 @@ class _HomeState extends State<Home> {
                   ),
                   title: const Text('My Hires'),
                   onTap: () {
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyHires())
+                    );
                   },
                 ),
                 ListTile(
@@ -63,7 +66,9 @@ class _HomeState extends State<Home> {
                   ),
                   title: const Text('Contact us'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Contact())
+                    );
                   },
                 ),
                 const AboutListTile( // <-- SEE HERE
@@ -219,24 +224,6 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      /*bottomNavigationBar: BottomAppBar(
-        notchMargin: 5,
-        elevation: 10,
-        clipBehavior: Clip.antiAlias,
-        shape: CircularNotchedRectangle(),
-        child: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: '')
-          ],
-          currentIndex: currentIndex,
-          onTap: (val) {
-            setState(() {
-              currentIndex = val;
-            });
-          },
-        ),
-      ),*/
     );
   }
 }

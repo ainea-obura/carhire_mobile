@@ -1,7 +1,7 @@
 // ----- STRINGS ------
 import 'package:flutter/material.dart';
 
-const baseURL = 'http://192.168.8.152:8000/api';
+const baseURL = 'http://192.168.120.124:8000/api';
 const loginURL = '$baseURL/login';
 const registerURL = '$baseURL/register';
 const logoutURL = '$baseURL/logout';
@@ -13,7 +13,7 @@ const brandURL = '$baseURL/brand/id';
 const carsURL = '$baseURL/cars';
 const carURL = '$baseURL/cars/id';
 const hireURL = '$baseURL/hire';
-const viewHireURL = '$baseURL/hire/id';
+const viewHireURL = '$baseURL/my-hire';
 // ----- Errors -----
 const serverError = 'Server error';
 const unauthorized = 'Unauthorized';

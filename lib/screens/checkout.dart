@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile/models/cars.dart';
 import 'package:mobile/screens/home.dart';
+import 'package:mobile/screens/success.dart';
 import 'package:mobile/services/hire_service.dart';
 
 import '../models/hire.dart';
@@ -36,6 +37,7 @@ class _CheckoutState extends State<Checkout> {
   //var car_id = cars.id;
 
   Future<Hire>? _hire;
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +82,7 @@ class _CheckoutState extends State<Checkout> {
                   children: [
                     const Text("Date Range"),
                     const SizedBox(height: 15),
+
                     Row(
                       children: [
                         Expanded(
@@ -140,7 +143,7 @@ class _CheckoutState extends State<Checkout> {
                               //initialDate: DateTime.now(),
                               initialDate: DateTime.parse(startController.text),
                               firstDate:DateTime.parse(startController.text),
-                              //firstDate: DateTime.now(), //DateTime.now() - not to allow to choose before today.
+                              //firstDate: DateTime(initialDate + 1)
                               lastDate: DateTime(DateTime.now().year + 5),
                             );
 
@@ -177,17 +180,18 @@ class _CheckoutState extends State<Checkout> {
               const SizedBox(
                 height: 15,
               ),
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF00A368)),
-                onPressed: () {
+                onPressed: () async {
                   setState(() {
                     _hire =
-                        createHire(cars.id ,startController.text, endController.text, totalAmount);
+                         createHire(cars.id ,startController.text, endController.text, totalAmount);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Home()),
+                          builder: (context) => Success()),
                     );
                   });
                 },
@@ -200,4 +204,5 @@ class _CheckoutState extends State<Checkout> {
       ),
     );
   }
+
 }

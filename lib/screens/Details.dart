@@ -42,11 +42,11 @@ class _CarDetailsState extends State<CarDetails> {
             children: [
               Container(
                 margin: const EdgeInsets.all(15),
-                height: 230,
+                height: 350,
                 width: double.infinity,
                 child: CarouselSlider.builder(
                   options: CarouselOptions(
-                    height: 230,
+                    height: 350,
                     //autoPlay: true,
                     onPageChanged: (index, reason) {
                       setState(() {
@@ -61,7 +61,7 @@ class _CarDetailsState extends State<CarDetails> {
                   itemBuilder: (context, index1, realIndex) {
                     return Image(
                       image: NetworkImage(
-                        'http://192.168.8.152:8000/product_images/${cars.images[index1].image.toString()}',
+                        'http://192.168.120.124:8000/product_images/${cars.images[index1].image.toString()}',
                       ),
                       //NetworkImage(items[index].logo.toString()),
                       fit: BoxFit.contain,

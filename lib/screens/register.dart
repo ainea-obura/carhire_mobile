@@ -47,17 +47,17 @@ class _RegisterState extends State<Register> {
     await pref.setString('token', user.token ?? '');
     await pref.setInt('userId', user.id ?? 0);
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+        MaterialPageRoute(builder: (context) => Login()), (route) => false);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text('Register'),
         centerTitle: true,
         backgroundColor: Colors.teal,
-      ),
+      ),*/
       body: Container(
           color: Colors.teal,
           child: Stack(

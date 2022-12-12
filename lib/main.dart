@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:mobile/screens/splashscreen.dart';
 import 'screens/loading.dart';
 
 void main() {
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Loading(),
+     home: Loading(),
     );
   }
 }

@@ -49,10 +49,20 @@ class _CarsWidgetState extends State<CarsWidget> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 250,
+                    maxCrossAxisExtent: 200,
                     childAspectRatio: 1 / 1.1,
+                    //childAspectRatio: 1 / 1.1,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10),
+
+                /*gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: MediaQuery.of(context).size.width /
+                      (MediaQuery.of(context).size.height/1/1),
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
+                ),*/
+
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -86,15 +96,16 @@ class _CarsWidgetState extends State<CarsWidget> {
                             child: Column(
                               children: [
                                 Container(
-                                  height: 100,
+                                  height: 120,
                                   width: 250,
                                   margin: const EdgeInsets.all(3),
                                   child: Image(
                                     image: NetworkImage(
-                                      'http://192.168.8.152:8000${snapshot.data!.cars[index].thumbnail.toString()}',
+                                      'http://192.168.120.124:8000${snapshot.data!.cars[index].thumbnail.toString()}',
                                     ),
                                     //NetworkImage(items[index].logo.toString()),
-                                    fit: BoxFit.fitHeight,
+                                    //fit: BoxFit.fitHeight,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                                 Padding(
